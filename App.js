@@ -4,6 +4,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useState, useEffect } from "react";
+import { Colors } from "react-native/Libraries/NewAppScreen";
 
 export default function App() {
 
@@ -30,7 +31,11 @@ export default function App() {
                 <Button title="Add Goal" onPress={addGoalHandler} />
             </View>
             <View style={styles.goalsContainer}>
-                {courseGoals.map((goal) => (<Text key={goal}>{goal}</Text>))}
+                {courseGoals.map((goal) => (
+                    <View key={goal} style={styles.goalItem}>
+                        <Text style={styles.goalText}>{goal}</Text>
+                    </View>
+                ))}
             </View>
         </View>
     );
@@ -65,4 +70,13 @@ const styles = StyleSheet.create({
     goalsContainer: {
         flex: 5,
     },
+    goalItem: {
+        margin: 8,
+        padding: 8,
+        borderRadius: 6,
+        backgroundColor: "#5e08cc",
+    },
+    goalText: {
+        color: "white",
+    }
 });
