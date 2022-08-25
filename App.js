@@ -2,7 +2,7 @@
         Import Dependencies
 ========================================*/
 import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, StyleSheet, Text, View, TextInput, ScrollView } from 'react-native';
 import { useState, useEffect } from "react";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 
@@ -31,11 +31,13 @@ export default function App() {
                 <Button title="Add Goal" onPress={addGoalHandler} />
             </View>
             <View style={styles.goalsContainer}>
-                {courseGoals.map((goal) => (
-                    <View key={goal} style={styles.goalItem}>
-                        <Text style={styles.goalText}>{goal}</Text>
-                    </View>
-                ))}
+                <ScrollView>
+                    {courseGoals.map((goal) => (
+                        <View key={goal} style={styles.goalItem}>
+                            <Text style={styles.goalText}>{goal}</Text>
+                        </View>
+                    ))}
+                </ScrollView>
             </View>
         </View>
     );
