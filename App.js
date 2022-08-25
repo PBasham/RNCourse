@@ -9,7 +9,7 @@ export default function App() {
 
     const [enteredGoalText, setEnteredGoalText] = useState("second")
     const [courseGoals, setCourseGoals] = useState([])
-    
+
     const goalInputHandler = (enteredText) => {
         console.log(enteredText)
         setEnteredGoalText(enteredText)
@@ -17,16 +17,20 @@ export default function App() {
 
     const addGoalHandler = () => {
         console.log(enteredGoalText)
+        setCourseGoals(currentCourseGoals => [
+            ...currentCourseGoals,
+            enteredGoalText
+        ])
     }
 
     return (
         <View style={styles.appContainer}>
             <View style={styles.inputContainer}>
-                <TextInput style={styles.textInput} placeholder="Your course goal!" onChangeText={goalInputHandler}/>
-                <Button title="Add Goal" onPress={addGoalHandler}/>
+                <TextInput style={styles.textInput} placeholder="Your course goal!" onChangeText={goalInputHandler} />
+                <Button title="Add Goal" onPress={addGoalHandler} />
             </View>
             <View style={styles.goalsContainer}>
-                <Text>List your goals</Text>
+                {courseGoals.map((goal) => (<Text key={goal}>{goal}</Text>))}
             </View>
         </View>
     );
