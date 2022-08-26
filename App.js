@@ -2,9 +2,19 @@
         Import Dependencies
 ========================================*/
 import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, View, TextInput, ScrollView } from 'react-native';
 import { useState, useEffect } from "react";
-import { Colors } from "react-native/Libraries/NewAppScreen";
+import {
+    StyleSheet,
+    View,
+    Button,
+    TextInput,
+    FlatList,
+} from 'react-native';
+
+/*========================================
+        Import Components
+========================================*/
+import { GoalItem } from "./components/GoalItem";
 
 export default function App() {
 
@@ -20,7 +30,7 @@ export default function App() {
         console.log(enteredGoalText)
         setCourseGoals(currentCourseGoals => [
             ...currentCourseGoals,
-            enteredGoalText
+            { text: enteredGoalText, id: Math.random().toString() }
         ])
     }
 
@@ -31,13 +41,13 @@ export default function App() {
                 <Button title="Add Goal" onPress={addGoalHandler} />
             </View>
             <View style={styles.goalsContainer}>
-                <ScrollView>
-                    {courseGoals.map((goal) => (
-                        <View key={goal} style={styles.goalItem}>
-                            <Text style={styles.goalText}>{goal}</Text>
-                        </View>
-                    ))}
-                </ScrollView>
+                <FlatList data={courseGoals} renderItem={(itemData) => {
+                    return <GoalItem text={itemData.item.text}/>
+                }}
+                keyExtractor={(item, index) => {
+                    return item.id
+                }}
+                />
             </View>
         </View>
     );
@@ -72,13 +82,5 @@ const styles = StyleSheet.create({
     goalsContainer: {
         flex: 5,
     },
-    goalItem: {
-        margin: 8,
-        padding: 8,
-        borderRadius: 6,
-        backgroundColor: "#5e08cc",
-    },
-    goalText: {
-        color: "white",
-    }
+    
 });
