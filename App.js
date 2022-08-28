@@ -45,27 +45,30 @@ export default function App() {
     // === Functions END === //
 
     return (
-        <View style={styles.appContainer}>
-            <Button title="Add New Goal" color="#5e0acc" onPress={startAddGoalHandler}/>
-            <GoalInput visible={modalIsVisable} onAddGoal={addGoalHandler} onCancel={endAddGoalHandler}/>
-            <View style={styles.goalsContainer}>
-                <FlatList
-                    data={courseGoals}
-                    renderItem={(itemData) => {
-                        return (
-                            <GoalItem
-                                text={itemData.item.text}
-                                id={itemData.item.id}
-                                onDeleteItem={deleteGoalHander}
-                            />
-                        )
-                    }}
-                    keyExtractor={(item, index) => {
-                        return item.id
-                    }}
-                />
+        <>
+            <StatusBar style="light" />
+            <View style={styles.appContainer}>
+                <Button title="Add New Goal" color="#ceb5ef" onPress={startAddGoalHandler} />
+                <GoalInput visible={modalIsVisable} onAddGoal={addGoalHandler} onCancel={endAddGoalHandler} />
+                <View style={styles.goalsContainer}>
+                    <FlatList
+                        data={courseGoals}
+                        renderItem={(itemData) => {
+                            return (
+                                <GoalItem
+                                    text={itemData.item.text}
+                                    id={itemData.item.id}
+                                    onDeleteItem={deleteGoalHander}
+                                />
+                            )
+                        }}
+                        keyExtractor={(item, index) => {
+                            return item.id
+                        }}
+                    />
+                </View>
             </View>
-        </View>
+        </>
     );
 }
 
